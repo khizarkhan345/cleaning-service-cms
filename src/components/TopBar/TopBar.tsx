@@ -5,7 +5,7 @@ import TestimonialImage from "../../images/TestimonialImage1.png";
 
 const TopBar = () => {
   return (
-    <div className="flex flex-row justify-between items-center px-[50px] py-[50px] border-b-[0.5px] border-[#9F9FA7] bg-[#fff]">
+    <div className="flex flex-row justify-between items-center px-[50px] py-[50px] border-b-[2px] dark:border-gray-700 bg-[#fff]">
       <div className="flex items-center">
         <h1 className="text-[40px] font-bold">Cleaning Service LLC</h1>
         <div className="ml-[80px]">
