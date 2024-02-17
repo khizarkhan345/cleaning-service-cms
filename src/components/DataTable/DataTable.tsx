@@ -1,5 +1,6 @@
 import React from "react";
 import SortAndFilter from "../SortAndFilter/SortAndFilter";
+import Pagination from "../Pagination/Pagination";
 
 const DataTable = () => {
   return (
@@ -92,6 +93,7 @@ const DataTable = () => {
           </table>
         </div>
       </div>
+      <Pagination />
     </div>
   );
 };

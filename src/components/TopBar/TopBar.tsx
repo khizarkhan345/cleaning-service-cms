@@ -12,7 +12,7 @@ const TopBar = () => {
           <input
             type="text"
             placeholder="Search..."
-            className="w-[450px] h-[50px] text-[#636D84] border border-[#9F9FA7] rounded-[20px] pl-[20px] focus:outline-none"
+            className="w-[450px] h-[50px] text-[#636D84] border-2 dark:border-gray-700 rounded-[15px] pl-[20px] focus:outline-none"
           />
         </div>
       </div>
