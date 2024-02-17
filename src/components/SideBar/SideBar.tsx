@@ -5,7 +5,7 @@ import settingIcon from "../../images/settings-icon.png";
 
 const SideBar = () => {
   return (
-    <div className="w-[20%] h-[760px] border-r-[1px] border-[#9F9FA7] pl-[20px] pt-[60px] bg-[#fff]">
+    <div className="w-[20%] h-[760px] border-r-[2px] dark:border-gray-700 pl-[20px] pt-[60px] bg-[#fff]">
       <div className="flex flex-row justify-start items-center mb-[50px]">
         <img
           src={dashboardIcon}
