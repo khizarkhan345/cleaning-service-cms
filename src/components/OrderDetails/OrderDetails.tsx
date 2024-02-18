@@ -1,0 +1,109 @@
+import React from "react";
+
+const OrderDetails = () => {
+  return (
+    <div className="w-[80%] mx-[100px] px-[100px] pt-[60px]">
+      <div className="grid grid-cols-2 justify-items-start mb-[50px]">
+        <div className="flex flex-col">
+          <span className="text-[20px] text-[#636D84] font-medium">Name</span>
+          <span className="text-[24px] font-semibold mt-[10px]">
+            Khizar Khan
+          </span>
+        </div>
+        <div className="flex flex-col pl-[100px]">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            Address
+          </span>
+          <span className="text-[24px] font-semibold  mt-[10px]">
+            123 XYZ Lorton VA 22079
+          </span>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 justify-items-start mb-[50px]">
+        <div className="flex flex-col">
+          <span className="text-[20px] text-[#636D84] font-medium">Email</span>
+          <span className="text-[24px] font-semibold mt-[10px]">
+            khizarkhan@test.com
+          </span>
+        </div>
+        <div className="flex flex-col pl-[100px]">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            Phone No
+          </span>
+          <span className="text-[24px] font-semibold  mt-[10px]">
+            888-123-4567
+          </span>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 justify-items-start mb-[50px]">
+        <div className="flex flex-col">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            Created Date
+          </span>
+          <span className="text-[24px] font-semibold mt-[10px]">
+            February 15th 2024
+          </span>
+        </div>
+        <div className="flex flex-col pl-[100px]">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            Delivery Date & Time
+          </span>
+          <span className="text-[24px] font-semibold  mt-[10px]">
+            February 28th 2024 14:00
+          </span>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 justify-items-start mb-[50px]">
+        <div className="flex flex-col">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            No Of Bedrooms
+          </span>
+          <span className="text-[24px] font-semibold mt-[10px]">1</span>
+        </div>
+        <div className="flex flex-col pl-[100px]">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            Number of Bathrooms
+          </span>
+          <span className="text-[24px] font-semibold  mt-[10px]">1</span>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 justify-items-start mb-[50px]">
+        <div className="flex flex-col">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            No Of LivingRooms
+          </span>
+          <span className="text-[24px] font-semibold mt-[10px]">2</span>
+        </div>
+        <div className="flex flex-col pl-[100px]">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            Number of Kitchens
+          </span>
+          <span className="text-[24px] font-semibold  mt-[10px]">0</span>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 justify-items-start mb-[50px]">
+        <div className="flex flex-col">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            Total Cost
+          </span>
+          <span className="text-[24px] font-semibold mt-[10px]">$200</span>
+        </div>
+        <div className="flex flex-col pl-[100px]">
+          <span className="text-[20px] text-[#636D84] font-medium">
+            Order Status
+          </span>
+          <span className="text-[24px] font-semibold  mt-[10px]">
+            Created/Pending/Completed
+          </span>
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <button className="bg-black text-[24px] font-bold w-[320px] h-[62px] text-white rounded-[15px] mx-auto">
+          Change Order
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default OrderDetails;
