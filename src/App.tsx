@@ -12,12 +12,11 @@ import "./App.css";
 function App() {
   return (
     <div className="bg-[#F3F5F7]">
-      {/* <TopBar />
+      <TopBar />
       <div className="flex flex-row">
         <SideBar />
-        <ChangeOrderDetails />
-      </div> */}
-      <LogIn />
+        <DataTable />
+      </div>
     </div>
   );
 }
