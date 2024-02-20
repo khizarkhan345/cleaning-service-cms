@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SortAndFilter from "../SortAndFilter/SortAndFilter";
 import Pagination from "../Pagination/Pagination";
+import { orders } from "../../Types/Types";
 
 const DataTable = () => {
+  const [data, setData] = useState<Array<orders>>([]);
+  useEffect(() => {
+    fetch("http://localhost:3001/cleaningInfo")
+      .then((result) => {
+        return result.json();
+      })
+      .then((data) => {
+        //console.log(data);
+        setData((prevData) => {
+          return [...prevData, data.data];
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  console.log(data);
   return (
     <div className="w-[80%] ">
       <SortAndFilter />
@@ -12,83 +31,55 @@ const DataTable = () => {
             <thead className="text-xs text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400 border-b dark:border-gray-700">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Product name
+                  Customer Name
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Color
+                  Address
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Category
+                  Phone No
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Price
+                  Order Details
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Action
+                  Order Status
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white border-b dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-[#636D84] whitespace-nowrap dark:text-white"
-                >
-                  Apple MacBook Pro 17"
-                </th>
-                <td className="px-6 py-4 text-[#636D84]">Silver</td>
-                <td className="px-6 py-4 text-[#636D84]">Laptop</td>
-                <td className="px-6 py-4 text-[#636D84]">$2999</td>
-                <td className="px-6 py-4 text-[#636D84]">xyz</td>
-              </tr>
-              <tr className="bg-white  border-b dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-[#636D84] whitespace-nowrap dark:text-white"
-                >
-                  Microsoft Surface Pro
-                </th>
-                <td className="px-6 py-4 text-[#636D84]">White</td>
-                <td className="px-6 py-4 text-[#636D84]">Laptop PC</td>
-                <td className="px-6 py-4 text-[#636D84]">$1999</td>
-                <td className="px-6 py-4 text-[#636D84]">xyz</td>
-              </tr>
-              <tr className="bg-white border-b dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-[#636D84] whitespace-nowrap dark:text-white"
-                >
-                  Magic Mouse 2
-                </th>
-                <td className="px-6 py-4 text-[#636D84]">Black</td>
-                <td className="px-6 py-4 text-[#636D84]">Accessories</td>
-                <td className="px-6 py-4 text-[#636D84]">$99</td>
-                <td className="px-6 py-4 text-[#636D84]">xyz</td>
-              </tr>
-              <tr className="bg-white border-b dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-[#636D84] whitespace-nowrap dark:text-white"
-                >
-                  Google Pixel Phone
-                </th>
-                <td className="px-6 py-4 text-[#636D84]">Gray</td>
-                <td className="px-6 py-4 text-[#636D84]">Phone</td>
-                <td className="px-6 py-4 text-[#636D84]">$799</td>
-                <td className="px-6 py-4 text-[#636D84]">Xyz</td>
-              </tr>
-              <tr className="bg-white border-b dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-[#636D84] whitespace-nowrap dark:text-white"
-                >
-                  Apple Watch 5
-                </th>
-                <td className="px-6 py-4 text-[#636D84]">Red</td>
-                <td className="px-6 py-4 text-[#636D84]">Wearables</td>
-                <td className="px-6 py-4 text-[#636D84]">$999</td>
-                <td className="px-6 py-4 text-[#636D84]">XYZ</td>
-              </tr>
+              {data.length > 0 ? (
+                data[0].map((d: orders) => (
+                  <tr className="bg-white border-b dark:border-gray-700">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-[#636D84] whitespace-nowrap dark:text-white"
+                    >
+                      {d.customer.firstName} {d.customer.lastName}
+                    </th>
+                    <td className="px-6 py-4 text-[#636D84]">
+                      {d.customer.streetAddress} {d.customer.city}{" "}
+                      {d.customer.state} {d.customer.zipCode}
+                    </td>
+                    <td className="px-6 py-4 text-[#636D84]">
+                      {d.customer.phoneNo}
+                    </td>
+                    <td className="px-6 py-4 text-[#636D84]">
+                      <div>
+                        <p>No of Bedrooms: {d.noOfBedrooms}</p>
+                        <p>No of Bathrooms: {d.noOfBathrooms}</p>
+                        <p>No of LivingRooms: {d.noOfLivingrooms}</p>
+                        <p>No of Kitchens: {d.noOfKitchens}</p>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-[#636D84]">
+                      {d.orderStatus}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <h1>Loading</h1>
+              )}
             </tbody>
           </table>
         </div>
