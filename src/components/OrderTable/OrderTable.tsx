@@ -5,6 +5,28 @@ import { orders } from "../../Types/Types";
 
 const DataTable = () => {
   const [data, setData] = useState<Array<orders>>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 3;
+  const noOfPages =
+    data.length > 0 ? Math.ceil(data[0].length / itemsPerPage) : 0;
+  //const noOfPages = 1;
+  //console.log(noOfPages);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  //console.log(data);
+  const dataFilter: any =
+    data.length > 0 ? data[0].slice(startIndex, endIndex) : [];
+
+  console.log(dataFilter);
+
+  const handlePageChange = (page: number) => {
+    console.log("page", page);
+    setCurrentPage(page);
+  };
+
   useEffect(() => {
     fetch("http://localhost:3001/cleaningInfo")
       .then((result) => {
@@ -21,7 +43,6 @@ const DataTable = () => {
       });
   }, []);
 
-  console.log(data);
   return (
     <div className="w-[80%] ">
       <SortAndFilter />
@@ -49,7 +70,7 @@ const DataTable = () => {
             </thead>
             <tbody>
               {data.length > 0 ? (
-                data[0].map((d: orders) => (
+                dataFilter.map((d: orders) => (
                   <tr className="bg-white border-b dark:border-gray-700">
                     <th
                       scope="row"
@@ -84,7 +105,12 @@ const DataTable = () => {
           </table>
         </div>
       </div>
-      <Pagination />
+      <Pagination
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        noOfPages={noOfPages}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 };
