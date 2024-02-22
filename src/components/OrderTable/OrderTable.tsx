@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SortAndFilter from "../SortAndFilter/SortAndFilter";
 import Pagination from "../Pagination/Pagination";
 import { orders } from "../../Types/Types";
@@ -6,6 +7,8 @@ import { orders } from "../../Types/Types";
 const DataTable = () => {
   const [data, setData] = useState<Array<orders>>([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const navigate = useNavigate();
 
   const itemsPerPage = 3;
   const noOfPages =
@@ -71,7 +74,10 @@ const DataTable = () => {
             <tbody>
               {data.length > 0 ? (
                 dataFilter.map((d: orders) => (
-                  <tr className="bg-white border-b dark:border-gray-700">
+                  <tr
+                    className="bg-white border-b dark:border-gray-700"
+                    onClick={() => navigate(`/orderdetails/${d.id}`)}
+                  >
                     <th
                       scope="row"
                       className="px-6 py-4 font-medium text-[#636D84] whitespace-nowrap dark:text-white"

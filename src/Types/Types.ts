@@ -36,3 +36,8 @@ export interface pagination {
     noOfPages: number,
     handlePageChange: (page: number) => void
 }
+
+export interface MyContextType {
+    data: orders[],
+    length: number
+}
