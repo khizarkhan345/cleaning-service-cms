@@ -13,6 +13,7 @@ import SignUp from "./components/SignUp/SignUp";
 import LogIn from "./components/LogIn/LogIn";
 
 import "./App.css";
+import SortAndFilter from "./components/SortAndFilter/SortAndFilter";
 
 function App() {
   const data: any = useFetch();
@@ -25,7 +26,7 @@ function App() {
           <SideBar />
           <MyContext.Provider value={data}>
             <Routes>
-              <Route path="/" element={<DataTable />} />
+              <Route path="/" element={<SortAndFilter />} />
               <Route path="/orderdetails/:id" element={<OrderDetails />} />
               <Route
                 path="/changeorderdetails/:id"

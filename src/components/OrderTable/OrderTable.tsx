@@ -1,54 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SortAndFilter from "../SortAndFilter/SortAndFilter";
 import Pagination from "../Pagination/Pagination";
 import { orders } from "../../Types/Types";
+import sortData from "../../common/SortData";
 
-const DataTable = () => {
-  const [data, setData] = useState<Array<orders>>([]);
+interface propsTypes {
+  sortOption: string;
+  data: orders[];
+}
+const DataTable = ({ sortOption, data }: propsTypes) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
 
+  const sortedData: orders[] = sortData(data, sortOption);
+
   const itemsPerPage = 3;
   const noOfPages =
-    data.length > 0 ? Math.ceil(data[0].length / itemsPerPage) : 0;
-  //const noOfPages = 1;
-  //console.log(noOfPages);
+    sortedData.length > 0 ? Math.ceil(data[0].length / itemsPerPage) : 0;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  //console.log(data);
   const dataFilter: any =
-    data.length > 0 ? data[0].slice(startIndex, endIndex) : [];
-
-  console.log(dataFilter);
+    sortedData.length > 0 ? sortedData.slice(startIndex, endIndex) : [];
 
   const handlePageChange = (page: number) => {
-    console.log("page", page);
     setCurrentPage(page);
   };
 
-  useEffect(() => {
-    fetch("http://localhost:3001/cleaningInfo")
-      .then((result) => {
-        return result.json();
-      })
-      .then((data) => {
-        //console.log(data);
-        setData((prevData) => {
-          return [...prevData, data.data];
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
-    <div className="w-[80%] ">
-      <SortAndFilter />
+    <div>
       <div className="pt-[50px] px-[30px]">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-white-500 dark:text-white-400">
@@ -71,12 +53,14 @@ const DataTable = () => {
                 </th>
               </tr>
             </thead>
-            <tbody>
-              {data.length > 0 ? (
-                dataFilter.map((d: orders) => (
+
+            {sortedData.length > 0 ? (
+              dataFilter.map((d: orders) => (
+                <tbody>
                   <tr
                     className="bg-white border-b dark:border-gray-700"
                     onClick={() => navigate(`/orderdetails/${d.id}`)}
+                    key={d.id}
                   >
                     <th
                       scope="row"
@@ -103,11 +87,11 @@ const DataTable = () => {
                       {d.orderStatus}
                     </td>
                   </tr>
-                ))
-              ) : (
-                <h1>Loading</h1>
-              )}
-            </tbody>
+                </tbody>
+              ))
+            ) : (
+              <p className="text-center text-[36px]">Loading</p>
+            )}
           </table>
         </div>
       </div>
