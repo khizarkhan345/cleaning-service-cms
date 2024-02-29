@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import { orders } from "../Types/Types";
 
+
 const useFetch = () => {
     const [data, setData] = useState<Array<orders>>([]);
 
@@ -20,9 +21,7 @@ const useFetch = () => {
           });
       }, []);
 
-     if(data.length > 0){
-        return data;
-     }
+     return data;
 }
 
 export default useFetch;

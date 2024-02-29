@@ -13,6 +13,7 @@ interface customer {
     updatedAt: string,
 }
 export interface orders {
+    sort(arg0: (a: any, b: any) => number): unknown
     length: number
     slice(startIndex: number, endIndex: number): unknown
     map(arg0: (d: orders) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode

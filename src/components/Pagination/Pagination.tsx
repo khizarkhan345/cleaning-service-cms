@@ -35,6 +35,7 @@ const Pagination = ({
       </button>
       {numberArray.map((_, index: number) => (
         <button
+          key={index}
           className={`${
             currentPage1 === index + 1 ? "bg-[#F3F5F7]" : "bg-white"
           } border dark:border-gray-700 w-[60px] h-[52px] text-[16px] font-bold`}
