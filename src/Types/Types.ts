@@ -13,6 +13,7 @@ interface customer {
     updatedAt: string,
 }
 export interface orders {
+    filter(arg0: (d: any) => void): unknown
     sort(arg0: (a: any, b: any) => number): unknown
     length: number
     slice(startIndex: number, endIndex: number): unknown
@@ -42,3 +43,9 @@ export interface MyContextType {
     data: orders[],
     length: number
 }
+
+export interface orderTablePropsTypes {
+    sortOption: string;
+    data: orders[];
+    filterOption: string[];
+  }
