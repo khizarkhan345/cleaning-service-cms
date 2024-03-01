@@ -3,27 +3,34 @@ import { useNavigate } from "react-router-dom";
 import Pagination from "../Pagination/Pagination";
 import { orders } from "../../Types/Types";
 import sortData from "../../common/SortData";
+import filterData from "../../common/filterData";
+import { orderTablePropsTypes } from "../../Types/Types";
 
-interface propsTypes {
-  sortOption: string;
-  data: orders[];
-}
-const DataTable = ({ sortOption, data }: propsTypes) => {
+const DataTable = ({
+  sortOption,
+  filterOption,
+  data,
+}: orderTablePropsTypes) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
 
   const sortedData: orders[] = sortData(data, sortOption);
 
+  const filterD: any =
+    filterOption.length > 0 ? filterData(data, filterOption) : sortedData;
+
   const itemsPerPage = 3;
   const noOfPages =
-    sortedData.length > 0 ? Math.ceil(data[0].length / itemsPerPage) : 0;
+    sortedData.length > 0 ? Math.ceil(filterD.length / itemsPerPage) : 0;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  // console.log(filterD);
+
   const dataFilter: any =
-    sortedData.length > 0 ? sortedData.slice(startIndex, endIndex) : [];
+    filterD.length > 0 ? filterD.slice(startIndex, endIndex) : [];
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
