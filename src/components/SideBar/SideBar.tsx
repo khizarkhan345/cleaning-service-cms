@@ -4,9 +4,16 @@ import dashboardIcon from "../../images/dashboard-icon.png";
 import helpIcon from "../../images/help-icon.png";
 import settingIcon from "../../images/settings-icon.png";
 
-const SideBar = () => {
+interface sideBarType {
+  token: string;
+}
+const SideBar = ({ token }: sideBarType) => {
   return (
-    <div className="w-[20%] h-[760px] border-r-[2px] dark:border-gray-700 pl-[20px] pt-[60px] bg-[#fff]">
+    <div
+      className={`${
+        token ? "w-[20%]" : "hidden"
+      } h-[760px] border-r-[2px] dark:border-gray-700 pl-[20px] pt-[60px] bg-[#fff]`}
+    >
       <Link
         to="/"
         className="flex flex-row justify-start items-center mb-[50px]"

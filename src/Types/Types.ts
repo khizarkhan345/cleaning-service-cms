@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react"
 
 interface customer {
     id: string,
@@ -40,8 +41,10 @@ export interface pagination {
 }
 
 export interface MyContextType {
-    data: orders[],
-    length: number
+    data: orders[] | null,
+    token: string | null,
+    setToken: (value: React.SetStateAction<string>) => void,
+    length: number | null,
 }
 
 export interface orderTablePropsTypes {

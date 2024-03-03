@@ -8,7 +8,7 @@ const SortAndFilter = () => {
   const [sortOption, setSortOption] = useState("createdAt desc");
   const [filterOption, setFilterOption] = useState<Array<string>>([]);
   const [filter, setFilter] = useState(false);
-  const data: any = useContext(MyContext);
+  const { data }: any = useContext(MyContext);
 
   const handleOptionChange = (option: string) => {
     let isSelected = filterOption.includes(option);

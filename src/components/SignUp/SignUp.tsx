@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from "axios";
 
 const SignUp = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const signUpHandler = () => {
+    Axios.post("http://localhost:3001/user/signup", {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <div className="w-[100%] h-[150px] bg-white border-b-[2px] dark:border-gray-700">
@@ -17,6 +39,8 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               className="w-[290px] h-[60px]  border-2 dark:border-gray-700 rounded-[15px] pl-[20px] focus:outline-none pl-[15px]"
             />
           </div>
@@ -24,6 +48,8 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               className="w-[290px] h-[60px]  border-2 dark:border-gray-700 rounded-[15px] pl-[20px] focus:outline-none pl-[15px]"
             />
           </div>
@@ -32,26 +58,35 @@ const SignUp = () => {
           <input
             type="text"
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-[590px] h-[60px]  border-2 dark:border-gray-700 rounded-[15px] pl-[20px] focus:outline-none pl-[15px]"
           />
         </div>
         <div className="flex flex-row mb-[30px]">
           <div className="mr-[10px]">
             <input
-              type="text"
+              type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-[290px] h-[60px]  border-2 dark:border-gray-700 rounded-[15px] pl-[20px] focus:outline-none pl-[15px]"
             />
           </div>
           <div>
             <input
-              type="text"
+              type="password"
               placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-[290px] h-[60px]  border-2 dark:border-gray-700 rounded-[15px] pl-[20px] focus:outline-none pl-[15px]"
             />
           </div>
         </div>
-        <button className="w-[300px] h-[60px] bg-black text-white font-bold rounded-[15px] mt-[20px]">
+        <button
+          className="w-[300px] h-[60px] bg-black text-white font-bold rounded-[15px] mt-[20px]"
+          onClick={signUpHandler}
+        >
           Sign Up
         </button>
       </div>
