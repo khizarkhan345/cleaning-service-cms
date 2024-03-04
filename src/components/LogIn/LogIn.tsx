@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import MyContext from "../../context/MyContext";
 const LogIn: React.FC = () => {
@@ -6,6 +7,8 @@ const LogIn: React.FC = () => {
   const { token, setToken } = useContext(MyContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const logInHandler = () => {
     Axios.post("http://localhost:3001/user/login", {
@@ -15,6 +18,7 @@ const LogIn: React.FC = () => {
       .then((result) => {
         console.log(result.data.token);
         setToken(result.data.token);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -56,6 +60,13 @@ const LogIn: React.FC = () => {
         >
           Log In
         </button>
+
+        <div className="flex flex-row mt-[15px]">
+          <p className="text-[#636D84] mr-[5px]">Don't have an account?</p>
+          <Link to="/signup" className="underline">
+            SignUp
+          </Link>
+        </div>
       </div>
     </div>
   );

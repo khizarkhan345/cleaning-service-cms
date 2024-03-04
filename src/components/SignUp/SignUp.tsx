@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "axios";
 
 const SignUp = () => {
@@ -89,6 +90,12 @@ const SignUp = () => {
         >
           Sign Up
         </button>
+        <div className="flex flex-row mt-[15px]">
+          <p className="text-[#636D84] mr-[5px]">Already have an account?</p>
+          <Link to="/login" className="underline">
+            LogIn
+          </Link>
+        </div>
       </div>
     </div>
   );

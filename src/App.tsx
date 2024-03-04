@@ -17,7 +17,7 @@ import SortAndFilter from "./components/SortAndFilter/SortAndFilter";
 
 function App() {
   const [token, setToken] = useState<string>("");
-  const { data }: any = useFetch();
+  const data: any = useFetch();
   // const navigate = useNavigate();
 
   const length = data.length > 0 ? data.length : 0;
@@ -45,7 +45,7 @@ function App() {
               <Route path="/settings" element={<Settings />} />
               <Route path="/helpandsupport" element={<HelpAndSupport />} />
               <Route path="/login" element={<LogIn />} />
-              <Route path="/login" element={<SignUp />} />
+              <Route path="/signup" element={<SignUp />} />
             </Routes>
           </div>
         </MyContext.Provider>
