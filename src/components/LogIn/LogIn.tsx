@@ -44,7 +44,9 @@ const LogIn: React.FC = () => {
         <p className="text-[24px] font-medium text-center mb-[50px]">
           Welcome to Cleaning Service LLC
         </p>
-        <p className="my-[10px] text-[#ff0000]">{error}</p>
+        <p className="my-[10px] text-[#ff0000] text-[20px] semi-bold">
+          {error}
+        </p>
         <div className="mb-[30px]">
           <input
             type="text"

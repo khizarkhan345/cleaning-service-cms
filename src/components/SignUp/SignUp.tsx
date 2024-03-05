@@ -12,6 +12,9 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const signUpHandler = () => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordRegex =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
     if (
       firstName === "" ||
       lastName === "" ||
@@ -25,6 +28,18 @@ const SignUp = () => {
       }, 3000);
     } else if (password !== confirmPassword) {
       setError("Password and confirm password does not match");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    } else if (!emailRegex.test(email)) {
+      setError("Enter valid email address");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    } else if (!passwordRegex.test(password)) {
+      setError(
+        "Enter a password that is atleast 8 characters long and has atleast one number and one special character"
+      );
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -44,7 +59,11 @@ const SignUp = () => {
           }, 2000);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("err:", err);
+          setError(err.response.data.message);
+          setTimeout(() => {
+            setError("");
+          }, 3000);
         });
     }
   };
@@ -60,7 +79,15 @@ const SignUp = () => {
         <p className="text-[24px] font-medium text-center mb-[50px]">
           Welcome to Cleaning Service LLC
         </p>
-        <p className="my-[10px] text-[#ff0000]">{error}</p>
+        <p
+          className={`${
+            error === "Account Created Successfully"
+              ? "text-[#008000]"
+              : "text-[#ff0000]"
+          } my-[10px] text-[20px] semi-bold`}
+        >
+          {error}
+        </p>
         <div className="flex flex-row mb-[30px]">
           <div className="mr-[10px]">
             <input
