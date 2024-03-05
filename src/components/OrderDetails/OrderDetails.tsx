@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import MyContext from "./../../context/MyContext";
 const OrderDetails = () => {
-  const Context: any = useContext(MyContext);
+  const { data }: any = useContext(MyContext);
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const order = Context[0].filter((c: any) => c.id === id);
+  const order = data[0].filter((c: any) => c.id === id);
 
   console.log(order);
 

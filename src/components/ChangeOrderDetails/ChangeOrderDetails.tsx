@@ -4,12 +4,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import MyContext from "./../../context/MyContext";
 
 const ChangeOrderDetails = () => {
-  const Context: any = useContext(MyContext);
+  const { data }: any = useContext(MyContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const order = Context[0].filter((c: any) => c.id === id);
-  console.log("order", order);
+  const order = data[0].filter((c: any) => c.id === id);
+  //console.log("order", order);
   const fullName =
     order[0].customer.firstName + " " + order[0].customer.lastName;
   const fullAddress =

@@ -26,8 +26,8 @@ function App() {
       <BrowserRouter>
         <MyContext.Provider value={{ data, token, setToken, length }}>
           {token ? <TopBar /> : ""}
-          <div className="flex flex-row">
-            <SideBar token={token} />
+          <div className={`${token ? "flex flex-row" : "block"}`}>
+            {token && <SideBar />}
             <Routes>
               <Route element={<ProtectRoutes />}>
                 <Route path="/" element={<SortAndFilter />} />

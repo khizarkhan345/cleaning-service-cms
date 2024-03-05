@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
 const SignUp = () => {
@@ -8,20 +8,45 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const signUpHandler = () => {
-    Axios.post("http://localhost:3001/user/signup", {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-    })
-      .then((result) => {
-        console.log(result);
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === ""
+    ) {
+      setError("Some input fields are empty");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    } else if (password !== confirmPassword) {
+      setError("Password and confirm password does not match");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    } else {
+      Axios.post("http://localhost:3001/user/signup", {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((result) => {
+          console.log(result);
+          setError("Account Created Successfully");
+          setTimeout(() => {
+            setError("");
+            navigate("/login");
+          }, 2000);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -35,6 +60,7 @@ const SignUp = () => {
         <p className="text-[24px] font-medium text-center mb-[50px]">
           Welcome to Cleaning Service LLC
         </p>
+        <p className="my-[10px] text-[#ff0000]">{error}</p>
         <div className="flex flex-row mb-[30px]">
           <div className="mr-[10px]">
             <input

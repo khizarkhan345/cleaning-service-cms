@@ -7,27 +7,35 @@ const LogIn: React.FC = () => {
   const { token, setToken } = useContext(MyContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const logInHandler = () => {
-    Axios.post("http://localhost:3001/user/login", {
-      email: email,
-      password: password,
-    })
-      .then((result) => {
-        console.log(result.data.token);
-        setToken(result.data.token);
-        navigate("/");
+    if (email === "" || password === "") {
+      setError("Email or password is empty");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    } else {
+      Axios.post("http://localhost:3001/user/login", {
+        email: email,
+        password: password,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((result) => {
+          console.log(result.data.token);
+          setToken(result.data.token);
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
     <div>
-      <div className="w-[100%] h-[150px] bg-white border-b-[2px] dark:border-gray-700">
+      <div className="w-full h-[150px] bg-white border-b-[2px] dark:border-gray-700">
         <h1 className="text-[40px] font-bold pl-[60px] py-[45px]">
           Cleaning Service LLC
         </h1>
@@ -36,6 +44,7 @@ const LogIn: React.FC = () => {
         <p className="text-[24px] font-medium text-center mb-[50px]">
           Welcome to Cleaning Service LLC
         </p>
+        <p className="my-[10px] text-[#ff0000]">{error}</p>
         <div className="mb-[30px]">
           <input
             type="text"
