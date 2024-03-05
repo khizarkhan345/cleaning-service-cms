@@ -6,6 +6,7 @@ const filterData = (data: orders[], filterOption: string[]) => {
         if(filterOption.includes(d.orderStatus.toLowerCase())){
             return d;
         }
+        
     }):[]
 }
 
